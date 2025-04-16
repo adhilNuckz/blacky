@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cool CSS using Anime.js</title>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+</head>
+
+<body>
+
+
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+body {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #e80202;
+}
+
+.container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+
+h2 {
+    color: #fff;
+    text-align: center;
+    font-size: 12vw ; 
+    line-height: 0.6em; 
+    z-index: 1000;
+    font-weight: 900;
+}
+
+h2 span {
+    font-size: 0.2em; 
+    letter-spacing: 0.4em; 
+    font-weight: 400;
+    text-transform: uppercase;
+
+}
+
+.block {
+    position: absolute; 
+    width: 50px; 
+    height: 100px; 
+    background: #e80202;
+    box-shadow: 10px 10px 50px rgb(0,0,0,0.2);
+    /* border-radius: 5px; */
+
+
+}
+
+section {
+    position: relative ; 
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;    
+    overflow: hidden;
+
+}
+
+
+section .text {
+    position: relative; 
+    font-size: 3em;
+    color: #7cf62c;
+    text-align: center  ;
+    -webkit-box-reflect: below -15px linear-gradient(transparent, rgba(224, 18, 18, 0.333));
+}
+
+section .text span  {
+    position: relative;
+    display: inline-block;
+}
+    </style>
+
+
+    <div class="container">
+        <h2><span>My First Try on</span> <br>Anime JS </h2>
+
+
+        <section>
+            <h3 class="text">
+                Developed by Nuckz
+            </h3>
+
+        </section>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script>
+        const container = document.querySelector('.container');
+        for (var i = 0; i <= 100; i++) {
+            const blocks = document.createElement('div');
+            blocks.classList.add('block');
+            container.appendChild(blocks);
+
+        }
+
+        function animateBlocks() {
+            anime({
+                targets: '.block',
+                translateX: function () {
+                    return anime.random(-700, 700);
+                },
+                translateY: function () {
+                    return anime.random(-500, 500);
+                },
+
+                scale: function () {
+                    return anime.random(1, 5);
+                },
+
+                easing: 'linear',
+                duration: 3000,
+                delay: anime.stagger(10),
+                complete: animateBlocks,
+
+
+
+            })
+        }
+
+        animateBlocks();
+
+          
+
+
+
+
+
+        const  text = document.querySelector('.text');
+        text.innerHTML =  text.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+
+
+        anime.timeline({
+                loop: true
+            })
+
+        .add({
+            targets: '.text span',
+            translateY: [-600, 0],
+            opacity: [0, 1],
+            scale: [10, 1],
+            easing: 'easeOutExpo',
+            duration: 1500,
+            delay: anime.stagger(100) 
+        }) 
+
+
+        .add({
+            targets: '.text span',
+            translateX: [0, -100],
+            opacity: [0, 1],
+            scale: [1, 1],
+            easing: 'easeOutExpo',
+            duration: 1500,
+            delay: anime.stagger(100) 
+        }) 
+
+        .add({
+            targets: '.text span',
+            translateX: [0, 0],
+            opacity: [1, 0],
+            scale: [1, 50],
+            easing: 'easeOutExpo',
+            duration: 1500,
+            delay: anime.stagger(100) 
+        }) 
+
+
+    </script>
+</body>
+
+</html>
